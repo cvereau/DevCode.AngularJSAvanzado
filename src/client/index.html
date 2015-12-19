@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="app.main">
+<head>
+    <meta charset="UTF-8">
+    <title ng-bind="title"></title>
+
+    <link rel="stylesheet" href="content/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="content/css/toastr.min.css"/>
+
+    <link rel="stylesheet" href="content/css/customtheme.css"/>
+    <link rel="stylesheet" href="content/css/styles.css"/>
+
+</head>
+<body>
+
+    <div ng-include="'app/layout/shell.html'"></div>
+
+    <!--vendor scripts-->
+    <script src="scripts/jquery-2.1.4.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-resource.min.js"></script>
+    <script src="scripts/angular-mocks.js"></script>
+    <script src="scripts/angular-ui-router.min.js"></script>
+    <script src="scripts/angular-messages.min.js"></script>
+    <script src="scripts/angular-sanitize.min.js"></script>
+    <script src="scripts/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script src="scripts/toastr.min.js"></script>
+
+    <!--custom scripts-->
+    <script src="app/app.module.js"></script>
+
+    <script src="app/blocks/logger/logger.module.js"></script>
+    <script src="app/blocks/logger/logger.js"></script>
+    <script src="app/blocks/exception/exception.module.js"></script>
+    <script src="app/blocks/exception/exception-handler.provider.js"></script>
+    <script src="app/blocks/exception/exception.js"></script>
+    <script src="app/blocks/router/router.module.js"></script>
+    <script src="app/blocks/router/routehelper.js"></script>
+
+    <script src="app/core/core.module.js"></script>
+    <script src="app/core/constants.js"></script>
+    <script src="app/core/config.js"></script>
+
+    <script src="app/data/dataservice.module.js"></script>
+    <script src="app/data/dataservice.js"></script>
+
+    <script src="app/widgets/widgets.module.js"></script>
+    <script src="app/widgets/ccWidgetHeader.js"></script>
+
+
+    <script src="app/layout/layout.module.js"></script>
+    <script src="app/layout/shell.js"></script>
+    <script src="app/layout/sidebar.js"></script>
+
+    <script src="app/dashboard/dashboard.module.js"></script>
+    <script src="app/dashboard/config.route.js"></script>
+    <script src="app/dashboard/dashboard.js"></script>
+
+    <script src="app/avengers/avengers.module.js"></script>
+    <script src="app/avengers/config.route.js"></script>
+    <script src="app/avengers/avengers.js"></script>
+
+</body>
+</html>
