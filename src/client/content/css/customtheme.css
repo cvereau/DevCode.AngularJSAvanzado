@@ -1274,5 +1274,50 @@ form {
 
 /* Users ends */
 
+/* Gridster */
+
+.gridster .gridster-item {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    overflow: hidden;
+    margin: 5px !important;
+}
+/* Gridster ends*/
+
+/* Security Monitor */
+.app-security-list{
+    width: 400px;
+    height: 400px;
+    overflow-y: scroll;
+    margin-top: 20px;
+    border: 1px solid #999;
+}
+
+.app-message {
+    min-width: 150px;
+    background-color: red;
+    color: white;
+    display: inline-block;
+    margin: 5px;
+    margin-left: 0;
+    padding: 3px;
+}
+
+.app-name{
+    display: inline-block;
+}
+
+.app-datetime{
+    font-size: 10px;
+}
+
+.non-error{
+    background-color: green;
+}
+
+
+/* Security Monitor Ends*/
 
 /*#endregion */
+
+

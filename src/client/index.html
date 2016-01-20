@@ -1,33 +1,49 @@
 <!DOCTYPE html>
-<html ng-app="app.main">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title ng-bind="title"></title>
 
     <link rel="stylesheet" href="content/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="content/css/toastr.min.css"/>
-
     <link rel="stylesheet" href="content/css/customtheme.css"/>
     <link rel="stylesheet" href="content/css/styles.css"/>
+    <link rel="stylesheet" href="content/css/toastr.min.css"/>
+    <link rel="stylesheet" href="content/css/angular-gridster.min.css"/>
+
+
 
 </head>
 <body>
 
     <div ng-include="'app/layout/shell.html'"></div>
 
-    <!--vendor scripts-->
+    <!-- vendor-->
     <script src="scripts/jquery-2.1.4.min.js"></script>
-    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/jquery.resize.js"></script>
     <script src="scripts/angular.min.js"></script>
-    <script src="scripts/angular-resource.min.js"></script>
-    <script src="scripts/angular-mocks.js"></script>
-    <script src="scripts/angular-ui-router.min.js"></script>
-    <script src="scripts/angular-messages.min.js"></script>
     <script src="scripts/angular-sanitize.min.js"></script>
-    <script src="scripts/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script src="scripts/angular-resource.min.js"></script>
+    <script src="scripts/angular-ui-router.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/toastr.min.js"></script>
+    <script src="scripts/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script src="scripts/angular-gridster.js"></script>
 
-    <!--custom scripts-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6U2ExB8yLDc7RiGPYK3C3yIzDPpyFJE0&sensor=false"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.5/firebase.js"></script>
+    <!-- RSVP -->
+    <script src="scripts/vendor/rsvp.min.js"></script>
+    <!-- GeoFire -->
+    <script src="scripts/vendor/geofire.min.js"></script>
+    <!-- Lo-Dash -->
+    <script src="scripts/vendor/lodash.min.js"></script>
+
+
+    <!--socket.io-->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!--modulo principal-->
     <script src="app/app.module.js"></script>
 
     <script src="app/blocks/logger/logger.module.js"></script>
@@ -46,8 +62,12 @@
     <script src="app/data/dataservice.js"></script>
 
     <script src="app/widgets/widgets.module.js"></script>
-    <script src="app/widgets/ccWidgetHeader.js"></script>
-
+    <script src="app/widgets/widgetHeader/ccWidgetHeader.js"></script>
+    <script src="app/widgets/widgetGauge/rtGaugeDirective.js"></script>
+    <script src="app/widgets/widgetLineChart/rtLineChartDirective.js"></script>
+    <script src="app/widgets/widgetCandlestickChart/rtCandlestickChartDirective.js"></script>
+    <script src="app/widgets/widgetSecurityMonitorControl/appSecurityMonitorDirective.js"></script>
+    <script src="app/widgets/widgetBusTracker/rtBusTrackerDirective.js"></script>
 
     <script src="app/layout/layout.module.js"></script>
     <script src="app/layout/shell.js"></script>
@@ -61,5 +81,13 @@
     <script src="app/avengers/config.route.js"></script>
     <script src="app/avengers/avengers.js"></script>
 
+
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script>
+        google.load('visualization','1.0', { 'packages': ['gauge','corechart'] });
+        google.setOnLoadCallback(function () {
+            angular.bootstrap(document, ['app']);
+        });
+    </script>
 </body>
 </html>

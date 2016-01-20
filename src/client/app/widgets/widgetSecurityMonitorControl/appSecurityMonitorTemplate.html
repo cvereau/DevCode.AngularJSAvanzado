@@ -1,0 +1,20 @@
+<h3>Security Monitor</h3>
+<select ng-model="filter">
+    <option>All</option>
+    <option>Sign On</option>
+    <option>Sign Off</option>
+    <option>Invalid Password</option>
+    <option>Illegal IP Address</option>
+</select>
+
+<div class="app-security-list">
+    <ul>
+        <li ng-repeat="msg in messages">
+            <div>
+                <div class="app-message {{msg.colorClass}}">{{msg.event}}</div>
+                <div class="app-name">{{msg.name}}</div>
+                <div class="app-datetime">{{msg.datetime| date:'medium'}}</div>
+            </div>
+        </li>
+    </ul>
+</div>

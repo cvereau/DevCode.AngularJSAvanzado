@@ -4,11 +4,10 @@
 (function () {
     'use strict';
 
-    angular
-        .module('blocks.exception')
+    angular.module('blocks.exception')
         .factory('exception', exception);
 
-    function exception(logger) {
+    function exception(logger){
         var service = {
             catcher: catcher
         };

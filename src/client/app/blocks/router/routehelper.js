@@ -1,39 +1,42 @@
 /**
- * Created by cvereau on 12/15/15.
+ * Created by cvereau on 12/16/15.
  */
 (function () {
     'use strict';
 
-    angular
-        .module('blocks.router')
+    angular.module('blocks.router')
         .provider('routehelperConfig', routehelperConfig)
         .factory('routehelper', routehelper);
 
-    routehelper.$inject = ['$location','$rootScope', '$state', 'logger', 'routehelperConfig'];
+    routehelper.$inject = ['$rootScope','$state','logger','routehelperConfig'];
 
     function routehelperConfig(){
         this.config = {
-            $urlRouterProvider: undefined,
-            $stateProvider: undefined
+           $stateProvider : undefined,
+           $urlRouterProvider: undefined,
+           resolveAlways: function () {
+               //ejecutar la carga de cierta data UNA SOLA VEZ en la app
+           },
+            docTitle : undefined
         };
 
         this.$get = function () {
-            return {
+          return{
               config: this.config
-            };
+          }
         };
     }
 
-    function routehelper($location,$rootScope,$state,logger,routehelperConfig){
+    function routehelper($rootScope, $state, logger, routehelperConfig){
+       var routes = [];
 
-        var routes = [];
-        var $urlRouterProvider = routehelperConfig.config.$urlRouterProvider;
-        var $stateProvider = routehelperConfig.config.$stateProvider;
+       var $urlRouterProvider = routehelperConfig.config.$urlRouterProvider;
+       var $stateProvider = routehelperConfig.config.$stateProvider;
 
-        var service = {
-            configureRoutes: configureRoutes,
-            getRoutes: getRoutes
-        };
+       var service = {
+         configureRoutes: configureRoutes,
+         getRoutes: getRoutes
+       };
 
         init();
 
@@ -41,16 +44,13 @@
 
         function configureRoutes(routes){
             routes.forEach(function (route) {
-                    route.config.resolve =
-                        angular.extend(route.config.resolve || {},
-                                            routehelperConfig.resolveAlways);
-                    $stateProvider.state(route.name ,route.config);
-            });
-            $urlRouterProvider.otherwise('/');
-        }
+                route.config.resolve =
+                    angular.extend(route.config.resolve || {},
+                                        routehelperConfig.resolveAlways);
 
-        function init(){
-            updateDocTitle();
+                $stateProvider.state(route.name, route.config);
+                $urlRouterProvider.otherwise("/");
+            });
         }
 
         function getRoutes(){
@@ -61,15 +61,21 @@
                     routes.push(route);
                 }
             }
+
             return routes;
+        }
+
+        function init(){
+            updateDocTitle();
         }
 
         function updateDocTitle(){
             $rootScope.$on('$stateChangeSuccess',
                 function (event, toState, fromState) {
-                    var title = routehelperConfig.config.docTitle + ' ' + (toState.title || '');
-                    $rootScope.title = title; // data bind to <title>
-                })
+                   var title = routehelperConfig.config.docTitle + ' ' +
+                       (toState.title || '');
+                    $rootScope.title = title;
+                });
         }
-    }
- }());
+    };
+}());

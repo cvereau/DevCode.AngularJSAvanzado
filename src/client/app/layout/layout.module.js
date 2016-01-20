@@ -1,11 +1,9 @@
-(function() {
+/**
+ * Created by cvereau on 12/16/15.
+ */
+(function () {
     'use strict';
 
-    var layout = angular.module('app.layout', []);
+    angular.module('app.layout',[]);
 
-    /*
-    layout.config(function ($sceProvider) {
-        $sceProvider.enabled(false);
-    });
-    */
 }());

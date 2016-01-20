@@ -24,6 +24,38 @@
                 </div>
             </div>
             <div class="row">
+                <div gridster="gridsterOpts">
+                    <ul>
+                        <li gridster-item
+                            size-x="vm.item.gaugeSizeX"
+                            size-y="vm.item.gaugeSizeY">
+                            <rt-gauge></rt-gauge>
+                        </li>
+                        <li gridster-item
+                            size-x="vm.item.lcSizeX"
+                            size-y="vm.item.lcSizeY">
+                            <rt-line-chart metric="cpuPct"></rt-line-chart>
+                        </li>
+                        <li gridster-item
+                            size-x="vm.item.csSizeX"
+                            size-y="vm.item.csSizeY">
+                            <rt-candlestick-chart metric="cpuPct"></rt-candlestick-chart>
+                        </li>
+                        <li gridster-item
+                                size-x="vm.item.smSizeX"
+                                size-y="vm.item.smSizeY">
+                            <app-security-monitor></app-security-monitor>
+                        </li>
+                        <li gridster-item
+                                size-x="vm.item.smSizeX"
+                                size-y="vm.item.smSizeY">
+                            <rt-bus-tracker lat="37.785326"
+                                            long="-122.405696"></rt-bus-tracker>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-6">
                     <div class="widget wblue">
                         <div data-cc-widget-header title="Avengers Movie Cast"
@@ -37,7 +69,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr data-ng-repeat="a in vm.avengers">
+                                    <tr ng-repeat="a in vm.avengers">
                                         <td>{{a.name}}</td>
                                         <td>{{a.character}}</td>
                                     </tr>

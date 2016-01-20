@@ -72,6 +72,7 @@
 
             function success() {
                 isPrimed = true;
+                //carga de data inicial
                 logger.info('Primed data');
             }
         }

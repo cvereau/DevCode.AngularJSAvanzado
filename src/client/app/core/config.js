@@ -1,58 +1,80 @@
 /**
- * Created by cvereau on 12/15/15.
+ * Created by cvereau on 12/16/15.
  */
-(function() {
+(function () {
     'use strict';
 
     var core = angular.module('app.core');
 
     core.config(toastrConfig);
 
-    function toastrConfig(toastr) {
+    function toastrConfig(toastr){
         toastr.options.timeOut = 4000;
         toastr.options.positionClass = 'toast-bottom-right';
     }
 
     var config = {
-        appErrorPrefix: '[NG-Avengers Error] ', //Configure the exceptionHandler decorator
+        appErrorPrefix: '[NG-Avengers Error] ', //configurar el exceptionHandler decorator
         appTitle: 'Avengers Angular Demo',
-        version: '1.0.0'
+        version: '1.0.0',
+        getNameForMetric: getNameForMetric
+    };
+
+    var transitFirebaseRef = new Firebase("https://publicdata-transit.firebaseio.com/");
+
+    var getGeoFireInstance = function () {
+      return new GeoFire(transitFirebaseRef.child('_geofire'));
+    };
+
+    var fireBaseConfig = {
+        transitFirebaseRef: transitFirebaseRef,
+        getGeoFireInstance: getGeoFireInstance
     };
 
     core.value('config', config);
+    core.value('fireBaseConfig', fireBaseConfig);
 
-    core.config(configure);
+    core.config(routerConfig);
 
-    /* @ngInject */
-    function configure ($logProvider,
-                        $urlRouterProvider,
-                        $stateProvider,
-                        routehelperConfigProvider,
-                        exceptionHandlerProvider) {
-        // turn debugging off/on (no info or warn)
+    function routerConfig($logProvider,
+                          $urlRouterProvider,
+                          $stateProvider,
+                          routehelperConfigProvider,
+                          exceptionHandlerProvider){
 
-        if ($logProvider.debugEnabled) {
+        if($logProvider.debugEnabled){
             $logProvider.debugEnabled(true);
         }
 
-        // Configure the common route provider
         routehelperConfigProvider.config.$urlRouterProvider = $urlRouterProvider;
         routehelperConfigProvider.config.$stateProvider = $stateProvider;
-        routehelperConfigProvider.config.docTitle = 'NG-Avengers: ';
-
+        routehelperConfigProvider.config.docTitle = "NG-Avengers: ";
 
         var resolveAlways = {
-            ready: function(dataservice) {
+           ready: function(dataservice){
                 return dataservice.ready();
-            }
-            // ready: ['dataservice', function (dataservice) {
-            //    return dataservice.ready();
-            // }]
+           }
         };
 
-        routehelperConfigProvider.config.resolveAlways = resolveAlways;
+        //routehelperConfigProvider.config.resolveAlways = resolveAlways;
 
-        // Configure the common exception handler
         exceptionHandlerProvider.configure(config.appErrorPrefix);
+
     }
-})();
+
+    function getNameForMetric(metric){
+        var name;
+        switch(metric){
+            case 'cpuPct':
+                name = 'CPU %';
+                break;
+            case 'bandWidth':
+                name = 'BandWidth %';
+                break;
+            default:
+                name = '';
+        }
+
+        return name;
+    }
+}());

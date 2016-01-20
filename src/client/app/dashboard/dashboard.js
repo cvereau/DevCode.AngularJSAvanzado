@@ -5,9 +5,9 @@
         .module('app.dashboard')
         .controller('Dashboard', Dashboard);
 
-    Dashboard.$inject = ['$q', 'dataservice', 'logger'];
+    Dashboard.$inject = ['$q', 'dataservice', 'logger','$rootScope'];
 
-    function Dashboard($q, dataservice, logger) {
+    function Dashboard($q, dataservice, logger, $rootScope) {
 
         /*jshint validthis: true */
         var vm = this;
@@ -19,16 +19,51 @@
         vm.avengerCount = 0;
         vm.avengers = [];
         vm.title = 'Dashboard';
+        vm.item = {};
+        vm.socketInitialized = false;
+        vm.securityMonitorInitialized = false;
 
         activate();
 
         function activate() {
+            initializeSocket();
+            setGridsterOptions();
             var promises = [getAvengerCount(), getAvengersCast()];
-//            Using a resolver on all routes or dataservice.ready in every controller
-//            return dataservice.ready(promises).then(function(){
             return $q.all(promises).then(function() {
                 logger.info('Activated Dashboard View');
             });
+        }
+
+        function initializeSocket(){
+            if(!vm.socketInitialized){
+                var socket = io.connect();
+
+                socket.on('metricServiceDataEvent', function (data) {
+                    $rootScope.$broadcast('socket', data);
+                });
+
+                socket.on('security event', function(msg){
+                    $rootScope.$broadcast('socketSecurityMonitor', msg);
+                });
+
+
+                vm.socketInitialized = true;
+            }
+        }
+
+
+        function setGridsterOptions(){
+            vm.item.gaugeSizeX = 1;
+            vm.item.gaugeSizeY = 1;
+
+            vm.item.lcSizeX = 2;
+            vm.item.lcSizeY = 1;
+
+            vm.item.csSizeX = 2;
+            vm.item.csSizeY = 1;
+
+            vm.item.smSizeX = 3;
+            vm.item.smSizeY = 3;
         }
 
         function getAvengerCount() {

@@ -1,10 +1,11 @@
 /**
- * Created by cvereau on 12/15/15.
+ * Created by cvereau on 12/16/15.
  */
-(function(){
+(function () {
     'use strict';
 
-    angular.module('app.main',[
+    angular.module('app', [
+       //Independientes
         'app.core',
         'app.widgets',
 
