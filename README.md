@@ -1,7 +1,7 @@
 # Angular JS Avanzado | DevCode.la
 Material del curso Angular JS Avanzado para DevCode.la
 
-## Requirements
+## Requerimientos
 
 - Instalar Node
 	- oe OSX instalar [home brew](http://brew.sh/) y escribir `brew install node`
