@@ -14,4 +14,4 @@ Material del curso Angular JS Avanzado para DevCode.la
 - Abrir terminal
 - Navegar hasta la raíz del proyecto
 - Escribir `npm start`
-- Navegar hacia localhost:8000
+- Navegar hacia `http://localhost:8000`
